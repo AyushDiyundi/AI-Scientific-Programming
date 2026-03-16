@@ -4,7 +4,7 @@ import joblib
 import os
 
 # 1. Page Config MUST be first Streamlit command
-st.set_page_config(page_title="Medical Insurance Premium Calculator", page_icon="🏥", layout="centered")
+st.set_page_config(page_title="Medical Insurance Premium Calculator", page_icon="🏥", layout="wide")
 
 # 2. Load the saved model and column names
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,59 +28,54 @@ if "prediction" not in st.session_state:
 # 4. Responsive CSS
 st.markdown("""
     <style>
+        /* Mobile-first: default to single column */
         .block-container {
-            padding: 1.25rem 1.25rem 2rem;
-            max-width: 980px;
+            max-width: 100%;
+            padding: 1rem 0.75rem 1.5rem !important;
         }
         .app-title {
-            font-size: clamp(1.9rem, 6vw, 2.7rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             font-weight: 700;
-            line-height: 1.15;
-            margin: 0 0 0.5rem 0;
-            overflow-wrap: anywhere;
+            line-height: 1.2;
+            margin: 0.5rem 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .app-subtitle {
-            font-size: clamp(1rem, 3.8vw, 1.1rem);
-            margin-bottom: 0.25rem;
+            font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+            margin-bottom: 0.5rem;
         }
-        [data-testid="stHorizontalBlock"] {
-            gap: 1rem;
-        }
+        /* Force all Streamlit columns to stack on mobile */
         [data-testid="column"] {
-            min-width: 0;
-        }
-        .stNumberInput,
-        .stSelectbox,
-        .stSlider,
-        div[data-baseweb="input"],
-        div[data-baseweb="select"] {
             width: 100% !important;
-            min-width: 0 !important;
+            flex-basis: 100% !important;
+        }
+        /* Prevent input widgets from overflowing */
+        .stNumberInput > div,
+        .stSelectbox > div,
+        .stSlider,
+        [data-baseweb="input"],
+        [data-baseweb="select"] {
+            width: 100% !important;
         }
         .premium-box {
             background: linear-gradient(135deg, #1a472a, #2d6a4f);
             color: white;
-            padding: 1.25rem;
+            padding: 1rem;
             border-radius: 12px;
             text-align: center;
-            font-size: clamp(1.1rem, 4vw, 1.8rem);
+            font-size: clamp(1rem, 3.5vw, 1.8rem);
             font-weight: bold;
             margin-top: 1rem;
             word-break: break-word;
         }
-        @media (max-width: 768px) {
+        /* Desktop: show two columns */
+        @media (min-width: 769px) {
             .block-container {
-                padding: 1rem 0.85rem 1.5rem;
-            }
-            [data-testid="stHorizontalBlock"] {
-                flex-direction: column;
+                padding: 1.5rem 2rem 2rem 2rem !important;
             }
             [data-testid="column"] {
-                width: 100% !important;
-                flex: 1 1 100% !important;
-            }
-            .premium-box {
-                padding: 1rem;
+                flex-basis: calc(50% - 0.5rem) !important;
             }
         }
     </style>
