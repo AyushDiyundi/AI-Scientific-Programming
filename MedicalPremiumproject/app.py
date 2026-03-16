@@ -2,10 +2,12 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import os
 
 # 1. Load the saved model and column names
-model = joblib.load('medical_premium_model.pkl')
-model_columns = joblib.load('model_columns.pkl')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = joblib.load(os.path.join(BASE_DIR, 'medical_premium_model.pkl'))
+model_columns = joblib.load(os.path.join(BASE_DIR, 'model_columns.pkl'))
 
 # 2. Setup the Web Page UI
 st.set_page_config(page_title="Insurance Predictor", page_icon="🏥")
