@@ -28,42 +28,103 @@ if "prediction" not in st.session_state:
 # 4. Responsive CSS
 st.markdown("""
     <style>
+        /* Hide Streamlit footer and menu */
+        header {
+            visibility: hidden;
+        }
+        #MainMenu {
+            visibility: hidden;
+        }
+        footer {
+            display: none !important;
+        }
+        .stAppToolbar {
+            display: none !important;
+        }
+        
+        /* Main container with proper spacing */
         .block-container {
             max-width: 100%;
-            padding: 1rem 0.75rem 1.5rem !important;
+            padding: 1.5rem 0.85rem 8rem !important;
         }
+        
+        /* Title styling - no clipping */
         .app-title {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
             font-weight: 700;
-            line-height: 1.2;
-            margin: 0.5rem 0;
+            line-height: 1.35;
+            margin: 0 0 0.75rem 0;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
         }
+        
+        /* Subtitle styling */
         .app-subtitle {
-            font-size: clamp(0.95rem, 3.5vw, 1.05rem);
-            margin-bottom: 0.5rem;
+            font-size: clamp(0.9rem, 3.2vw, 1.05rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            color: #b0bec5;
         }
-        /* Prevent input widgets from overflowing */
+        
+        /* Form container */
+        .stForm {
+            border: none !important;
+            padding: 0 !important;
+            background: transparent !important;
+        }
+        
+        /* Divider spacing */
+        .stDivider {
+            margin: 1.5rem 0 !important;
+        }
+        
+        /* Input widgets full width */
         .stNumberInput,
         .stSelectbox,
         .stSlider {
             width: 100% !important;
         }
+        
+        /* Metric styling */
+        .stMetric {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        /* Premium result box - prominent and scrollable */
         .premium-box {
             background: linear-gradient(135deg, #1a472a, #2d6a4f);
             color: white;
-            padding: 1rem;
+            padding: 1.5rem 1.25rem;
             border-radius: 12px;
             text-align: center;
-            font-size: clamp(1rem, 3.5vw, 1.8rem);
+            font-size: clamp(1.1rem, 4vw, 2rem);
             font-weight: bold;
-            margin-top: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 6rem;
             word-break: break-word;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(26, 71, 42, 0.3);
         }
+        
+        /* Desktop optimizations */
         @media (min-width: 769px) {
             .block-container {
-                padding: 1.5rem 2rem 2rem 2rem !important;
+                padding: 2rem 2.5rem 6rem 2.5rem !important;
+            }
+            .app-title {
+                font-size: 2.8rem;
+                margin-bottom: 0.75rem;
+            }
+            .app-subtitle {
+                font-size: 1.05rem;
+                margin-bottom: 2rem;
+            }
+            .premium-box {
+                margin-bottom: 4rem;
             }
         }
     </style>
