@@ -28,7 +28,6 @@ if "prediction" not in st.session_state:
 # 4. Responsive CSS
 st.markdown("""
     <style>
-        /* Mobile-first: default to single column */
         .block-container {
             max-width: 100%;
             padding: 1rem 0.75rem 1.5rem !important;
@@ -45,17 +44,10 @@ st.markdown("""
             font-size: clamp(0.95rem, 3.5vw, 1.05rem);
             margin-bottom: 0.5rem;
         }
-        /* Force all Streamlit columns to stack on mobile */
-        [data-testid="column"] {
-            width: 100% !important;
-            flex-basis: 100% !important;
-        }
         /* Prevent input widgets from overflowing */
-        .stNumberInput > div,
-        .stSelectbox > div,
-        .stSlider,
-        [data-baseweb="input"],
-        [data-baseweb="select"] {
+        .stNumberInput,
+        .stSelectbox,
+        .stSlider {
             width: 100% !important;
         }
         .premium-box {
@@ -69,13 +61,9 @@ st.markdown("""
             margin-top: 1rem;
             word-break: break-word;
         }
-        /* Desktop: show two columns */
         @media (min-width: 769px) {
             .block-container {
                 padding: 1.5rem 2rem 2rem 2rem !important;
-            }
-            [data-testid="column"] {
-                flex-basis: calc(50% - 0.5rem) !important;
             }
         }
     </style>
@@ -87,21 +75,17 @@ st.divider()
 
 # 5. Input Fields in a form
 with st.form("premium_form"):
-    col1, col2 = st.columns(2)
-
-    with col1:
-        age = st.slider("Age", 18, 66, 30)
-        height = st.number_input("Height (cm)", min_value=140, max_value=200, value=165, step=1)
-        weight = st.number_input("Weight (kg)", min_value=40, max_value=150, value=70, step=1)
-        diabetes = st.selectbox("Diabetes?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-        bp = st.selectbox("Blood Pressure Problems?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-
-    with col2:
-        transplant = st.selectbox("Any Transplants?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-        chronic = st.selectbox("Any Chronic Diseases?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-        allergies = st.selectbox("Known Allergies?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-        cancer_fam = st.selectbox("Family Cancer History?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-        surgeries = st.slider("Major Surgeries", 0, 3, 0)
+    # Always use single column layout - simpler and mobile-friendly
+    age = st.slider("Age", 18, 66, 30)
+    height = st.number_input("Height (cm)", min_value=140, max_value=200, value=165, step=1)
+    weight = st.number_input("Weight (kg)", min_value=40, max_value=150, value=70, step=1)
+    diabetes = st.selectbox("Diabetes?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    bp = st.selectbox("Blood Pressure Problems?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    transplant = st.selectbox("Any Transplants?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    chronic = st.selectbox("Any Chronic Diseases?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    allergies = st.selectbox("Known Allergies?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    cancer_fam = st.selectbox("Family Cancer History?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+    surgeries = st.slider("Major Surgeries", 0, 3, 0)
 
     st.divider()
 
