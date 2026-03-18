@@ -52,7 +52,4 @@ streamlit run app.py
 - Scikit-learn
 - Joblib
 
----
-
-Made with ❤️ by Ayush Diyundi
 
