@@ -16,7 +16,7 @@ def load_model():
 try:
     model, model_columns = load_model()
 except Exception as e:
-    st.error(f"❌ Failed to load model: {e}")
+    st.error(f"Failed to load model: {e}")
     st.stop()
 
 if "prediction" not in st.session_state:
@@ -115,7 +115,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="app-title">🏥 Medical Insurance Premium Calculator</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-title">Medical Insurance Premium Calculator</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-subtitle">Fill in your health details below to get an instant premium estimate.</div>', unsafe_allow_html=True)
 st.divider()
 
@@ -136,7 +136,7 @@ with st.form("premium_form"):
     bmi = weight / ((height / 100) ** 2)
     st.metric("Your Calculated BMI", f"{bmi:.1f}")
 
-    submit_prediction = st.form_submit_button("💰 Predict My Premium", use_container_width=True)
+    submit_prediction = st.form_submit_button("Predict My Premium", use_container_width=True)
 
 if submit_prediction:
     input_data = pd.DataFrame(
@@ -152,4 +152,4 @@ if st.session_state.prediction is not None:
         unsafe_allow_html=True
     )
     if bmi > 30:
-        st.warning("⚠️ Note: High BMI is a significant risk factor in this premium calculation.")
+        st.warning("Note: High BMI is a significant risk factor in this premium calculation.")
